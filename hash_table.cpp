@@ -116,6 +116,10 @@ bool HashTable::add(int curKey, HashNode* myNode)
 bool HashTable::remove(int curKey)
 {
 	int code = calculateHashCode(curKey);
+
+	if(table[code]==nullptr)
+		return false;
+
 	//Special case when removing first node in bucket
 	if(table[code]->key == curKey)
 	{
