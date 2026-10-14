@@ -8,79 +8,89 @@
 
 #include "dll_node.h"
 #include "doubly_linked_list.h"
+#include "hash_node.h"
 #include "hash_table.h"
 #include "cache_manager.h"
+#include "milestone3.h"
 
 //TODO: Comment
 HashTable* CacheManager::getTable()
 {
-    return this->hashTable;
+    return hashTable;
 }
 
 //TODO: Comment
 DoublyLinkedList* CacheManager::getList()
 {
-    return this->doublyLinkedList;
+    return doublyLinkedList;
 }
 
 //TODO: Comment
 int CacheManager::getSize()
 {
-    return this->doublyLinkedList->getSize();
+    return doublyLinkedList->getSize();
 }
 
 //TODO: Comment
 bool CacheManager::isEmpty()
 {
-    //TODO: Implement
-    return false;
+    return doublyLinkedList->isEmpty();
 }
 
 //TODO: Comment
-bool CacheManager::add(int curKet, DllNode* myNode)
+bool CacheManager::add(int curKey, DllNode* myNode)
 {
-    //TODO: Implement
+    if(hashTable->add(curKey, new HashNode(curKey, myNode)))
+    {
+        doublyLinkedList->insertAtHead(curKey, myNode);
+        if(doublyLinkedList->getSize() >= maxCacheSize)
+        {
+            hashTable->remove(doublyLinkedList->tail->key);
+            doublyLinkedList->removeTailNode();
+        }
+        return true;
+    }
     return false;
+
 }
 
 //TODO: Comment
-bool CacheManager::remove(int curKet)
+bool CacheManager::remove(int curKey)
 {
-    //TODO: Implement
-    return false;
+    if(!hashTable->remove(curKey))
+        return false;
+    doublyLinkedList->remove(curKey);
+    return true;
 }
 
 //TODO: Comment
 void CacheManager::clear()
 {
-    //TODO: Implement
-    return;
+    hashTable->clear();;
+    doublyLinkedList->clear();
 }
 
 //TODO: Comment
-DllNode* CacheManager::getItem(int curKet)
+DllNode* CacheManager::getItem(int curKey)
 {
-    //TODO: Implement
-    return nullptr;
+    return hashTable->getItem(curKey)->fifoNode;
 }
 
 //TODO: Comment
 int CacheManager::getMaxCacheSize()
 {
-    //TODO: Implement
-    return 0;
+    return maxCacheSize;
 }
 
 //TODO: Comment
-bool CacheManager::contains(int curKet)
+bool CacheManager::contains(int curKey)
 {
-    //TODO: Implement
-    return false;
+    return hashTable->contains(curKey);
 }
 
 //TODO: Comment
 void CacheManager::printCache()
 {
-    //TODO: Implement
-    return;
+    doublyLinkedList->printList();
+    hashTable->printTable();
 }

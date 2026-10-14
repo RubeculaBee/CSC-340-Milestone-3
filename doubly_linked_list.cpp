@@ -215,14 +215,14 @@ void DoublyLinkedList::clear()
  */
 void DoublyLinkedList::printList()
 {
-	logToFileAndConsole("\nHere are the List contents:");
+	logToFileAndConsole("\nHere are the FIFO List contents:");
 	DllNode* current = head;
 	while(current)
 	{
-		logToFileAndConsole("Node key: " + std::to_string(current->key));
+		logToFileAndConsole("FIFO Node key: " + std::to_string(current->key));
 		current = current->next;
 	}
-	logToFileAndConsole("End of List");
+	logToFileAndConsole("End of FIFO List");
 }
 
 /**
