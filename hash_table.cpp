@@ -78,12 +78,16 @@ int HashTable::getNumberOfItems()
  * @param mynode: The node to be added
  * @return True if it the node was added, false if the key already exists in the hash table.
  */
-bool HashTable::add(int curKey, HashNode* mynode)
+bool HashTable::add(int curKey, HashNode* myNode)
 {
 	int code = calculateHashCode(curKey);
 	// If bucket is empty, simple add
 	if(table[code] == nullptr)
-		table[code] = mynode;
+	{
+		myNode->prev = nullptr;
+		myNode->next = nullptr;
+		table[code] = myNode;
+	}
 	else
 	{
 		HashNode* currentNode;
@@ -97,9 +101,10 @@ bool HashTable::add(int curKey, HashNode* mynode)
 		if(currentNode->key == curKey)
 				return false;
 		// append new node to end of chain
-		currentNode->next = mynode;
-		mynode->prev = currentNode;
+		currentNode->next = myNode;
+		myNode->prev = currentNode;
 	}
+	numberOfItems++;
 	return true;
 }
 
@@ -211,7 +216,7 @@ void HashTable::printTable()
 		{
 			logToFileAndConsole("Bucket " + std::to_string(i) + ": ");
 			for(HashNode* currentNode = table[i]; currentNode != nullptr; currentNode = currentNode->next)
-				currentNode->printNode(true);
+				currentNode->printNode(false);
 		}
 	}
 

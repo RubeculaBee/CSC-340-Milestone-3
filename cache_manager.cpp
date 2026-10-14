@@ -66,7 +66,7 @@ bool CacheManager::remove(int curKey)
 //TODO: Comment
 void CacheManager::clear()
 {
-    hashTable->clear();;
+    hashTable->clear();
     doublyLinkedList->clear();
 }
 
@@ -91,6 +91,10 @@ bool CacheManager::contains(int curKey)
 //TODO: Comment
 void CacheManager::printCache()
 {
+    logToFileAndConsole("\n\nPrinting out the cache contents");
+
     doublyLinkedList->printList();
     hashTable->printTable();
+
+    logToFileAndConsole("End of cache contents\n");
 }
