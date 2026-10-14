@@ -32,46 +32,46 @@ bool DoublyLinkedList::isEmpty() { return !head; }
  * Adds a new node at the front of the list, it becomes the new head.
  *
  * @param key: the value to be stored in the new node
- * @param newNode: Pointer to the node that will be inserted.
+ * @param new_node: the pointer to the node to be added
  * @return nothing
  */
-void DoublyLinkedList::insertAtHead(int key, DllNode* newNode)
+void DoublyLinkedList::insertAtHead(int key, DllNode* new_node)
 {
-	newNode->key = key;
+	new_node->key = key;
 	
 	if(isEmpty())
 	{
-		head = newNode;
-		tail = newNode;
+		head = new_node;
+		tail = new_node;
 		return;
 	}
 
-	newNode->next = head;
-	head->prev = newNode;
-	head = newNode;
+	new_node->next = head;
+	head->prev = new_node;
+	head = new_node;
 }
 
 /**
  * Adds a new node at the back of the list, it becomes the new tail.
  *
  * @param key: the value to be stored in the new node
- * @param newNode: Pointer to the node that will be inserted.
+ * @param new_node: the pointer to the node to be added
  * @return nothing
  */
-void DoublyLinkedList::insertAtTail(int key, DllNode* newNode)
+void DoublyLinkedList::insertAtTail(int key, DllNode* new_node)
 {
-	newNode->key = key;
+	new_node->key = key;
 	
 	if(isEmpty())
 	{
-		head = newNode;
-		tail = newNode;
+		head = new_node;
+		tail = new_node;
 		return;
 	}
 	
-	newNode->prev = tail;
-	tail->next = newNode;
-	tail = newNode;
+	new_node->prev = tail;
+	tail->next = new_node;
+	tail = new_node;
 }
 
 /**

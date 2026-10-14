@@ -14,22 +14,19 @@
 //TODO: Comment
 HashTable* CacheManager::getTable()
 {
-    //TODO: Implement
-    return nullptr;
+    return this->hashTable;
 }
 
 //TODO: Comment
 DoublyLinkedList* CacheManager::getList()
 {
-    //TODO: Implement
-    return nullptr;
+    return this->doublyLinkedList;
 }
 
 //TODO: Comment
 int CacheManager::getSize()
 {
-    //TODO: Implement
-    return 0;
+    return this->doublyLinkedList->getSize();
 }
 
 //TODO: Comment
