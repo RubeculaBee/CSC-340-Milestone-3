@@ -7,6 +7,7 @@
  * @date 09/05/2026 - initial creation
  * @date 09/07/2026 - completed code 
  * @date 09/08/2026 - Added comments
+ * @date 10/14/2026 - Updated for Milestone 3
  * @author Robin Lane
  */
 
@@ -31,44 +32,46 @@ bool DoublyLinkedList::isEmpty() { return !head; }
  * Adds a new node at the front of the list, it becomes the new head.
  *
  * @param key: the value to be stored in the new node
+ * @param newNode: Pointer to the node that will be inserted.
  * @return nothing
  */
-void DoublyLinkedList::insertAtHead(int key)
+void DoublyLinkedList::insertAtHead(int key, DllNode* newNode)
 {
-	DllNode* new_node = new DllNode(key);
+	newNode->key = key;
 	
 	if(isEmpty())
 	{
-		head = new_node;
-		tail = new_node;
+		head = newNode;
+		tail = newNode;
 		return;
 	}
 
-	new_node->next = head;
-	head->prev = new_node;
-	head = new_node;
+	newNode->next = head;
+	head->prev = newNode;
+	head = newNode;
 }
 
 /**
  * Adds a new node at the back of the list, it becomes the new tail.
  *
  * @param key: the value to be stored in the new node
+ * @param newNode: Pointer to the node that will be inserted.
  * @return nothing
  */
-void DoublyLinkedList::insertAtTail(int key)
+void DoublyLinkedList::insertAtTail(int key, DllNode* newNode)
 {
-	DllNode* new_node = new DllNode(key);
+	newNode->key = key;
 	
 	if(isEmpty())
 	{
-		head = new_node;
-		tail = new_node;
+		head = newNode;
+		tail = newNode;
 		return;
 	}
 	
-	new_node->prev = tail;
-	tail->next = new_node;
-	tail = new_node;
+	newNode->prev = tail;
+	tail->next = newNode;
+	tail = newNode;
 }
 
 /**
@@ -152,7 +155,7 @@ void DoublyLinkedList::removeTailNode()
 void DoublyLinkedList::moveNodeToHead(int key)
 {
 	remove(key);
-	insertAtHead(key);
+	insertAtHead(key, new DllNode(0));
 }
 
 /**
@@ -164,7 +167,7 @@ void DoublyLinkedList::moveNodeToHead(int key)
 void DoublyLinkedList::moveNodeToTail(int key)
 {
 	remove(key);
-	insertAtTail(key);
+	insertAtTail(key, new DllNode(0));
 }
 
 
