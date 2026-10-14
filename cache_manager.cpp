@@ -3,6 +3,7 @@
  * @brief Implementation of a Cache Manager that interacts with a FIFO list and a Hash table.
  *
  * @date 10/14/2026 - initial creation
+ * @date 10/14/2026 - added comments
  * @author Robin Lane
  */
 
@@ -13,31 +14,51 @@
 #include "cache_manager.h"
 #include "milestone3.h"
 
-//TODO: Comment
+/**
+ * @brief Gets a pointer to the internal hash table.
+ * 
+ * @return Pointer to the HashTable object.
+ */
 HashTable* CacheManager::getTable()
 {
     return hashTable;
 }
 
-//TODO: Comment
+/**
+ * @brief Gets a pointer to the internal linked list.
+ * 
+ * @return Pointer to the DoublyLinkedList object.
+ */
 DoublyLinkedList* CacheManager::getList()
 {
     return doublyLinkedList;
 }
 
-//TODO: Comment
+/**
+ * @brief Gets the amount of item in the cache.
+ * 
+ * @return The number of items in the cache.
+ */
 int CacheManager::getSize()
 {
     return doublyLinkedList->getSize();
 }
 
-//TODO: Comment
+/**
+ * @brief Gets whether the cache has ay items.
+ * 
+ * @return true if there is at least one item, false otherwise.
+ */
 bool CacheManager::isEmpty()
 {
     return doublyLinkedList->isEmpty();
 }
 
-//TODO: Comment
+/**
+ * @brief Adds an item to the cache (to both the FIFO list and hash table).
+ * 
+ * @return true if the item was successfully added, false otherwise.
+ */
 bool CacheManager::add(int curKey, DllNode* myNode)
 {
     if(hashTable->add(curKey, new HashNode(curKey, myNode)))
@@ -54,7 +75,11 @@ bool CacheManager::add(int curKey, DllNode* myNode)
 
 }
 
-//TODO: Comment
+/**
+ * @brief Removes an item from the cache (from both the FIFO list and hash table).
+ * 
+ * @return true if the item was successfully removed, false otherwise.
+ */
 bool CacheManager::remove(int curKey)
 {
     if(!hashTable->remove(curKey))
@@ -63,32 +88,55 @@ bool CacheManager::remove(int curKey)
     return true;
 }
 
-//TODO: Comment
+/**
+ * @brief Removes every item in the cache (list and table) until it is empty
+ * 
+ * @return none
+ */
 void CacheManager::clear()
 {
     hashTable->clear();
     doublyLinkedList->clear();
 }
 
-//TODO: Comment
+/**
+ * @brief Gets an item from the cache with a certain key 
+ *        (from hash table for efficiency)
+ * 
+ * @return The item with the matching key
+ */
 DllNode* CacheManager::getItem(int curKey)
 {
     return hashTable->getItem(curKey)->fifoNode;
 }
 
-//TODO: Comment
+/**
+ * @brief Gets the maximum number of items that can exist in the cache.
+ * 
+ * @return the maximum cache size.
+ */
 int CacheManager::getMaxCacheSize()
 {
     return maxCacheSize;
 }
 
-//TODO: Comment
+/**
+ * @brief Checks if an item with a specific key exists in the hash manager
+ *        (from hash table for efficency)
+ * 
+ * @return true if the item is found, false otherwise
+ */
 bool CacheManager::contains(int curKey)
 {
     return hashTable->contains(curKey);
 }
 
-//TODO: Comment
+/**
+ * @brief Prints the contents of both the FIFO list and hash table to
+ *        the console and the ouput log.
+ * 
+ * @return none
+ */
 void CacheManager::printCache()
 {
     logToFileAndConsole("\n\nPrinting out the cache contents");
