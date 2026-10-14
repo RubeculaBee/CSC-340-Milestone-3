@@ -21,6 +21,20 @@ DoublyLinkedList::DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 DoublyLinkedList::~DoublyLinkedList() { this->clear(); }
 
 /**
+ * Returns the amount of items in the list
+ *
+ * @param none
+ * @return tThe amount of nodes found
+ */
+int DoublyLinkedList::getSize()
+{
+	int num = 0;
+	for(DllNode* currentNode = this->head; currentNode != nullptr; currentNode = currentNode->next)
+		num++;
+	return num;
+}
+
+/**
  * checks if there are any nodes in the list
  *
  * @param none
